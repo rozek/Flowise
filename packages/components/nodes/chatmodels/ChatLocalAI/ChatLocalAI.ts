@@ -1,7 +1,6 @@
 import { INode, INodeData, INodeParams } from '../../../src/Interface'
 import { getBaseClasses } from '../../../src/utils'
-import { OpenAIChat } from 'langchain/llms/openai'
-import { OpenAIChatInput } from 'langchain/chat_models/openai'
+import { ChatOpenAI, OpenAIChatInput } from 'langchain/chat_models/openai'
 
 class ChatLocalAI_ChatModels implements INode {
     label: string
@@ -20,7 +19,7 @@ class ChatLocalAI_ChatModels implements INode {
         this.icon = 'localai.png'
         this.category = 'Chat Models'
         this.description = 'Use local LLMs like llama.cpp, gpt4all using LocalAI'
-        this.baseClasses = [this.type, 'BaseChatModel', ...getBaseClasses(OpenAIChat)]
+        this.baseClasses = [this.type, ...getBaseClasses(ChatOpenAI)]
         this.inputs = [
             {
                 label: 'Base Path',
@@ -80,11 +79,10 @@ class ChatLocalAI_ChatModels implements INode {
         }
 
         if (maxTokens) obj.maxTokens = parseInt(maxTokens, 10)
-        if (topP) obj.topP = parseInt(topP, 10)
+        if (topP) obj.topP = parseFloat(topP)
         if (timeout) obj.timeout = parseInt(timeout, 10)
 
-        const model = new OpenAIChat(obj, { basePath })
-
+        const model = new ChatOpenAI(obj, { basePath })
         return model
     }
 }
