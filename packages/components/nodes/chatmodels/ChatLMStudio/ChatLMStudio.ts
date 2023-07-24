@@ -36,19 +36,11 @@ class ChatLMStudio_ChatModels implements INode {
                 description: 'desired LLM Model'
             },
             {
-                label: 'Streaming Mode',
-                name: 'streaming',
-                type: 'boolean',
-                default: true,
-                description: 'stream partial results or wait for final result?'
-            },
-            {
                 label: 'Temperature',
                 name: 'temperature',
                 type: 'number',
                 default: 0,
                 optional: true,
-                additionalParams: true,
                 description: 'text generation "temperature" (0...2)'
             },
             {
@@ -96,6 +88,14 @@ class ChatLMStudio_ChatModels implements INode {
                 description: 'sequence at which to stop token generation'
             },
             {
+                label: 'Streaming Mode',
+                name: 'streaming',
+                type: 'boolean',
+                default: true,
+                additionalParams: true,
+                description: 'stream partial results or wait for final result?'
+            },
+            {
                 label: 'Timeout',
                 name: 'timeout',
                 type: 'number',
@@ -109,20 +109,20 @@ class ChatLMStudio_ChatModels implements INode {
     async init(nodeData: INodeData): Promise<any> {
         const basePath         = nodeData.inputs?.basePath as string
         const modelName        = nodeData.inputs?.modelName as string
-        const streaming        = nodeData.inputs?.streaming as boolean
         const temperature      = nodeData.inputs?.temperature as string
         const maxTokens        = nodeData.inputs?.maxTokens as string
         const topP             = nodeData.inputs?.topP as string
         const frequencyPenalty = nodeData.inputs?.frequencyPenalty as string
         const presencePenalty  = nodeData.inputs?.presencePenalty as string
         const stop             = nodeData.inputs?.stop as string
+        const streaming        = nodeData.inputs?.streaming as boolean
         const timeout          = nodeData.inputs?.timeout as string
 
         const obj: Partial<OpenAIChatInput> & { openAIApiKey?: string } = {
-            temperature: parseFloat(temperature),
+            temperature: parseFloat(temperature ?? '0'),
             modelName,
             openAIApiKey:'sk-xxxx',                              // just a dummy
-            streaming:(streaming == true)
+            streaming:streaming ?? true
         }
 
         if (maxTokens)        obj.maxTokens        = parseInt(maxTokens, 10)
