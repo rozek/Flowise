@@ -2,6 +2,8 @@
 
 <img width="100%" src="https://github.com/FlowiseAI/Flowise/blob/main/images/flowise.png?raw=true"></a>
 
+> This repository is essentially the same as the [original](https://github.com/FlowiseAI/Flowise), but contains a few new or modified components used by the author himself.
+    
 # Flowise - Build LLM Apps Easily
 
 [![Release Notes](https://img.shields.io/github/release/FlowiseAI/Flowise)](https://github.com/FlowiseAI/Flowise/releases)
@@ -12,9 +14,6 @@
 
 <h3>Drag & drop UI to build your customized LLM flow</h3>
 <a href="https://github.com/FlowiseAI/Flowise">
-
-> This repository is essentially the same as the [original](https://github.com/FlowiseAI/Flowise), but contains a few new or modified components used by the author himself.
-    
 <img width="100%" src="https://github.com/FlowiseAI/Flowise/blob/main/images/flowise.gif?raw=true"></a>
 
 ## ⚡Quick Start
