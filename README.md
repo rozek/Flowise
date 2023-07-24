@@ -2,7 +2,7 @@
 
 <img width="100%" src="https://github.com/FlowiseAI/Flowise/blob/main/images/flowise.png?raw=true"></a>
 
-> This repository is essentially the same as the [original](https://github.com/FlowiseAI/Flowise), but contains a few new or modified components used by the author himself.
+> This repository is essentially the same as the [original](https://github.com/FlowiseAI/Flowise), but contains a few new (ChatLMStudio) or modified (ChatLocalAI) components used by the author himself.
 > 
 > **Important: when trying to build Flowise yourself, please consider [Issue #338](https://github.com/FlowiseAI/Flowise/issues/338) in order to avoid problems!**
     
