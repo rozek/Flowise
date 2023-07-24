@@ -26,13 +26,22 @@ class ChatLMStudio_ChatModels implements INode {
                 label: 'Base Path',
                 name: 'basePath',
                 type: 'string',
-                placeholder: 'http://localhost:1234/v1'
+                default: 'http://localhost:1234/v1',
+                description: 'base URL of LM Studio Server'
             },
             {
                 label: 'Model Name',
                 name: 'modelName',
                 type: 'string',
-                placeholder: 'llama-2-13b-ggmlv3.q4_0.bin'
+                default: 'llama-2-13b-ggmlv3.q4_0.bin',
+                description: 'desired LLM Model'
+            },
+            {
+                label: 'Streaming Mode',
+                name: 'streaming',
+                type: 'boolean',
+                default: true,
+                description: 'stream partial results or wait for final result?'
             },
             {
                 label: 'Temperature',
@@ -40,7 +49,8 @@ class ChatLMStudio_ChatModels implements INode {
                 type: 'string',   // because Flowise has problems with DE locale
                 default: '0.9',
                 optional: true,
-                additionalParams: true
+                additionalParams: true,
+                description: 'text generation "temperature" (0...1)'
             },
             {
                 label: 'Max Tokens',
@@ -48,7 +58,8 @@ class ChatLMStudio_ChatModels implements INode {
                 type: 'string',   // because Flowise has problems with DE locale
                 default: '-1',
                 optional: true,
-                additionalParams: true
+                additionalParams: true,
+                description: 'max. number of tokens to generate (or -1)'
             },
             {
                 label: 'Top Probability',
@@ -56,7 +67,8 @@ class ChatLMStudio_ChatModels implements INode {
                 type: 'string',   // because Flowise has problems with DE locale
                 default:'0.95',
                 optional: true,
-                additionalParams: true
+                additionalParams: true,
+                description: 'top-p setting (0...1)'
             },
             {
                 label: 'Frequency Penalty',
@@ -64,7 +76,8 @@ class ChatLMStudio_ChatModels implements INode {
                 type: 'string',   // because Flowise has problems with DE locale
                 default:'1.1',
                 optional: true,
-                additionalParams: true
+                additionalParams: true,
+                description: 'frequency penalty (0...2)'
             },
             {
                 label: 'Presence Penalty',
@@ -72,14 +85,16 @@ class ChatLMStudio_ChatModels implements INode {
                 type: 'string',   // because Flowise has problems with DE locale
                 default:'1.1',
                 optional: true,
-                additionalParams: true
+                additionalParams: true,
+                description: 'presence penalty (0...2)'
             },
             {
                 label: 'Timeout',
                 name: 'timeout',
                 type: 'number',
                 optional: true,
-                additionalParams: true
+                additionalParams: true,
+                description: 'timeout in milliseconds'
             }
         ]
     }
@@ -87,6 +102,7 @@ class ChatLMStudio_ChatModels implements INode {
     async init(nodeData: INodeData): Promise<any> {
         const basePath         = nodeData.inputs?.basePath as string
         const modelName        = nodeData.inputs?.modelName as string
+        const streaming        = nodeData.inputs?.streaming as boolean
         const temperature      = nodeData.inputs?.temperature as string
         const maxTokens        = nodeData.inputs?.maxTokens as string
         const topP             = nodeData.inputs?.topP as string
@@ -97,7 +113,7 @@ class ChatLMStudio_ChatModels implements INode {
         const obj: Partial<OpenAIChatInput> = {
             temperature: parseFloat(temperature),
             modelName,
-            streaming:true
+            streaming:(streaming == true)
         }
 
         if (maxTokens)        obj.maxTokens        = parseInt(maxTokens, 10)
