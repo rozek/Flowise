@@ -75,8 +75,7 @@ class NodeRED_LLMs implements INode {
                 name: 'stop',
                 type: 'string',
                 default: '',
-                additionalParams: true,
-                description: 'sequence at which to stop token generation'
+                description: 'text at which to stop token generation'
             },
             {
                 label: 'Timeout',
