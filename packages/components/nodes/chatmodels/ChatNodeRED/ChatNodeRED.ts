@@ -29,6 +29,13 @@ class ChatNodeRED_ChatModels implements INode {
                 description: 'base URL of Node-RED Server'
             },
             {
+                label: 'API Key',
+                name: 'openAIApiKey',
+                type: 'password',
+                default: 'sk-xxxx',
+                description: 'API Key to authenticate request'
+            },
+            {
                 label: 'Model Name',
                 name: 'modelName',
                 type: 'string',
@@ -90,6 +97,7 @@ class ChatNodeRED_ChatModels implements INode {
 
     async init(nodeData: INodeData): Promise<any> {
         const basePath         = nodeData.inputs?.basePath as string
+        const openAIApiKey     = nodeData.inputs?.openAIApiKey as string
         const modelName        = nodeData.inputs?.modelName as string
         const temperature      = nodeData.inputs?.temperature as string
         const maxTokens        = nodeData.inputs?.maxTokens as string
@@ -101,7 +109,7 @@ class ChatNodeRED_ChatModels implements INode {
         const obj: Partial<OpenAIChatInput> & { openAIApiKey?: string } = {
             temperature: parseFloat(temperature ?? '0'),
             modelName,
-            openAIApiKey:'sk-xxxx'                               // just a dummy
+            openAIApiKey
         }
 
         if (maxTokens)        obj.maxTokens        = parseInt(maxTokens, 10)
