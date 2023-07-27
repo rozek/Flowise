@@ -74,7 +74,7 @@ class ChatNodeRED_ChatModels implements INode {
                 label: 'Stop Sequence',
                 name: 'stop',
                 type: 'string',
-                default: '###',
+                default: '',
                 additionalParams: true,
                 description: 'sequence at which to stop token generation'
             },
