@@ -18,7 +18,7 @@ class ChatNodeRED_ChatModels implements INode {
         this.type  = 'ChatNodeRED'
         this.icon  = 'node-red-icon.png'
         this.category = 'Chat Models'
-        this.description = 'Use OpenAI-compatible Node-RED flows instead of OpenAI itself'
+        this.description = 'use OpenAI-compatible Node-RED flows instead of OpenAI itself'
         this.baseClasses = [this.type, ...getBaseClasses(ChatOpenAI)]
         this.inputs = [
             {
