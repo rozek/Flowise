@@ -18,7 +18,7 @@ class NodeRED_LLMs implements INode {
         this.type  = 'NodeRED'
         this.icon  = 'node-red-icon.png'
         this.category = 'LLMs'
-        this.description = 'uses LM Studio Server Mode instead of OpenAI'
+        this.description = 'use OpenAI-compatible Node-RED flows instead of OpenAI itself'
         this.baseClasses = [this.type, ...getBaseClasses(OpenAI)]
         this.inputs = [
             {
@@ -26,7 +26,7 @@ class NodeRED_LLMs implements INode {
                 name: 'basePath',
                 type: 'string',
                 default: 'http://localhost:8000/v1',
-                description: 'base URL of LM Studio Server'
+                description: 'base URL of Node-RED Server'
             },
             {
                 label: 'API Key',
